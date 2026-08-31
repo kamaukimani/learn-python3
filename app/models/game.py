@@ -3,6 +3,7 @@ from sqlalchemy.orm import Mapped,mapped_column,relationship
 from typing import List
 from datetime import datetime
 from . import Base
+from .association import game_user
 #from review import Review
 
 class Game(Base):
@@ -16,3 +17,4 @@ class Game(Base):
     updated_at:Mapped[datetime]=mapped_column(DateTime,server_default=func.now(),onupdate=func.now())
 
     reviews:Mapped[List["Review"]]=relationship(back_populates="game",cascade="all, delete-orphan")
+    users:Mapped[List["User"]]=relationship(secondary=game_user,back_populates="games",passive_deletes=True)
