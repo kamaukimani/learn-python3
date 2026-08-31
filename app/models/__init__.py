@@ -7,3 +7,4 @@ class Base(DeclarativeBase):
 
 from .game import Game
 from .review import Review
+from .user import User
